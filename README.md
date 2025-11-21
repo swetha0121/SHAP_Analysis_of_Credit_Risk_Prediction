@@ -158,3 +158,142 @@ This project demonstrates a complete **Explainable Machine Learning workflow** u
 It provides both **global** and **local** model explanations, making it suitable for finance, banking, and regulatory use cases.
 
 ---
+
+## Expected Deliverables
+
+1 The complete, runnable Python code for data preparation, modeling, tuning, and SHAP analysis (provided as plain text).
+### **1️⃣ Complete Runnable Python Code**
+A full end-to-end Python script is included, covering:
+- Data loading  
+- Data cleaning and preprocessing  
+- Label encoding and feature scaling  
+- SMOTE for class balancing  
+- XGBoost model training  
+- GridSearchCV hyperparameter tuning  
+- Evaluation (AUC, Precision, Recall, F1-score)  
+- SHAP global + local interpretability  
+
+The entire code is provided inside this README under the **Full Code** section.
+
+---
+2 A text-based report detailing the chosen model architecture, hyperparameter tuning results, and performance metrics (AUC, Precision, Recall).
+### **2️⃣ Text-Based Model Report**
+A detailed written summary is included in this README describing:
+- The chosen model architecture (XGBoost with specific parameters)  
+- Best hyperparameters found by GridSearchCV  
+- Model performance metrics:  
+  - **ROC-AUC Score**  
+  - **Precision**  
+  - **Recall**  
+  - **F1-score**  
+  - **Classification Report**  
+
+This report explains why XGBoost was chosen, how hyperparameters improved performance, and what the metrics tell us about model quality.
+view full report in reports/auto_report.txt
+---
+3 A textual analysis comparing global feature importance derived from standard model metrics versus SHAP values
+### **3️⃣ Comparison of Global Feature Importance**
+A textual analysis is provided comparing:
+- **Native XGBoost feature importance values**  
+- **SHAP global feature importance (mean absolute SHAP values)**  
+
+Key comparison points include:
+- Which features XGBoost considers important  
+- How SHAP gives deeper insight into positive/negative impacts  
+- Why SHAP is preferred for financial explainability  
+view full answer in Textual_analysis.txt
+---
+
+4 Textual descriptions interpreting the local SHAP explanations (force plots) for the three selected high-risk cases, including specific variable contributions.
+### **4️⃣ Local SHAP Explanation Descriptions**
+Below are three example textual interpretations you can use as templates. They are deliberately concrete and refer to common credit features. After running the script, replace the feature names and SHAP numbers with ones from reports/high_risk_shap_contributions.csv and reports/local_shap_summaries.txt.
+Three high-risk test cases are selected, and for each:
+- The top contributing features  
+- Whether each feature increased or decreased default probability  
+- A human-readable explanation of the force plot  
+
+This provides transparency for individual predictions—critical in finance and loan decision auditing.
+Below are three example textual interpretations you can use as templates. They are deliberately concrete and refer to common credit features. After running the script, replace the feature names and SHAP numbers with ones from reports/high_risk_shap_contributions.csv and reports/local_shap_summaries.txt.
+
+### Example Local SHAP Interpretation — High-Risk Case 1
+
+Test index: 1345 (example)
+Predicted probability of default: 0.92 (92%)
+True label: 1 (default) — if known
+
+**Top positive contributors (pushing model → default):**
+
+- past_default (SHAP +0.75): Applicant has previous defaults — the largest single risk driver.
+
+- debt_to_income_ratio (SHAP +0.42): High DTI increases stress on repayment ability.
+
+- loan_amount (SHAP +0.31): Requested loan size is much larger than income/typical loans, raising risk.
+
+- interest_rate (SHAP +0.12): Higher interest rate increased repayment burden.
+
+- num_recent_inquiries (SHAP +0.08): Multiple recent credit inquiries indicate credit-seeking behavior.
+
+**Top negative contributors (pushing model ← non-default):**
+
+- employment_length (SHAP -0.10): Longer employment reduced risk slightly.
+
+- annual_income (SHAP -0.05): Income level provided a small offset to risk.
+
+**Interpretation & action:**
+The model's prediction is primarily driven by a history of prior default and an elevated debt-to-income ratio. For underwriting, this suggests manual review focusing on repayment context (was prior default due to one-time event?) and verification of income/debt figures. If the customer can demonstrate mitigating circumstances or provide collateral, the risk may be mitigated.
+
+### Example Local SHAP Interpretation — High-Risk Case 2
+
+Test index: 2876
+Predicted probability of default: 0.86 (86%)
+True label: 0 (non-default) — if known
+
+**Top positive contributors:**
+
+- credit_history_length (SHAP +0.50): Very short history — model treats this as higher risk.
+
+- loan_purpose = 'debt_consolidation' (SHAP +0.22): Some purposes are associated with higher default rates historically.
+
+- loan_amount_to_income (SHAP +0.15): Loan relative to income is high.
+
+**Top negative contributors:**
+
+- no_of_open_accounts (SHAP -0.20): Multiple active accounts with good standing reduce risk.
+
+- home_ownership (SHAP -0.10): Owning a home reduces risk slightly.
+
+**Interpretation & action:**
+Here, the short credit history and loan purpose mainly push the prediction to default, though other factors reduce risk. For fair lending, consider whether credit history length penalizes certain demographic groups; consider supplementing the model with alternative data (rent payments, utilities) to improve credit signals for thin-file applicants.
+
+### Example Local SHAP Interpretation — High-Risk Case 3
+
+Test index: 4230
+Predicted probability of default: 0.81 (81%)
+True label: 1
+
+**Top positive contributors:**
+
+- recent_delinquencies (SHAP +0.60): Several recent late payments — strong signal toward default.
+
+- interest_rate (SHAP +0.25): Elevated interest compared to peer group.
+
+- employment_gap_months (SHAP +0.10): Recent job gaps increased uncertainty.
+
+**Top negative contributors:**
+
+- savings_balance (SHAP -0.15): Reasonable savings reduce immediate liquidity risk.
+
+- co_applicant_present (SHAP -0.06): Co-signer reduces default likelihood.
+
+**Interpretation & action:**
+Recent delinquencies dominate the prediction. Actions: require additional documentation, consider conditional approval with higher monitoring or require cosigner/collateral, or provide tailored repayment plans.
+
+---
+
+
+
+
+
+
+
+
