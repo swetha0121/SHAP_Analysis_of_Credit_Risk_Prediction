@@ -192,7 +192,7 @@ This report explains why XGBoost was chosen, how hyperparameters improved perfor
 view full report in reports/auto_report.txt
 ---
 3 A textual analysis comparing global feature importance derived from standard model metrics versus SHAP values
-### **3️⃣ Comparison of Global Feature Importance**
+### **3️⃣ Comparison of Global Feature Importance** 
 A textual analysis is provided comparing:
 - **Native XGBoost feature importance values**  
 - **SHAP global feature importance (mean absolute SHAP values)**  
