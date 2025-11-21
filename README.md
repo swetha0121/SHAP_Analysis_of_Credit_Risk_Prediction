@@ -173,8 +173,7 @@ A full end-to-end Python script is included, covering:
 - Evaluation (AUC, Precision, Recall, F1-score)  
 - SHAP global + local interpretability  
 
-The entire code is provided inside this README under the **Full Code** section.
-
+The entire code is provided inside credit_risk_shap_full.py
 ---
 2 A text-based report detailing the chosen model architecture, hyperparameter tuning results, and performance metrics (AUC, Precision, Recall).
 ### **2️⃣ Text-Based Model Report**
