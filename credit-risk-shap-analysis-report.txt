@@ -1,0 +1,76 @@
+Interpretable Machine Learning — SHAP Analysis of Credit Risk Prediction
+=====================================================================
+
+Project summary
+---------------
+Goal: Predict loan default (binary) and provide explainability (global + local) using XGBoost and SHAP.
+
+Dataset
+-------
+Source: Kaggle — "Credit Risk Dataset" (laotse)
+Rows: ..............................
+Columns: ...........................
+
+Model architecture
+------------------
+Model type: XGBoost (gradient-boosted decision trees)
+Implementation: xgboost.XGBClassifier
+Objective: binary:logistic
+Evaluation metric for tuning: ROC-AUC (Area Under ROC Curve)
+Hyperparameter search:
+ - n_estimators: [100, 200]
+ - max_depth: [3, 5, 7]
+ - learning_rate: [0.01, 0.1]
+ - subsample: [0.8, 1]
+Best parameters (GridSearchCV): {PUT GRIDSEARCH.BEST_PARAMS_ HERE}
+
+Handling class imbalance
+------------------------
+Technique: SMOTE (oversampling minority class) applied to training set.
+
+Performance metrics (test set)
+------------------------------
+Replace the example numbers below with your results from `reports/metrics_summary.txt`:
+
+ - ROC-AUC: 0.XXXX
+ - Precision: 0.XXXX
+ - Recall: 0.XXXX
+ - F1-score: 0.XXXX
+
+Detailed classification report:
+(see `reports/classification_report.txt` for full table)
+
+Global explainability (SHAP vs XGBoost feature importance)
+----------------------------------------------------------
+XGBoost native importance (gain or split importance) shows which features the model uses more frequently to split and improve objective. This is useful for a quick ranking but:
+ - It does not show direction (positive/negative effect).
+ - It can be biased towards features with more distinct values or more splits.
+
+SHAP (mean absolute SHAP values) gives:
+ - Feature importance with direction-awareness when inspecting feature-by-feature.
+ - Measures how much each feature contributed (on average) to changing the model output.
+ - Allows richer local explanations for individual decisions.
+
+(See `outputs/plots/shap_summary_bar.png` and `outputs/plots/shap_beeswarm.png`.)
+
+Local explanations — high-risk instances
+---------------------------------------
+For each high-risk test instance we provide:
+ - The predicted probability of default.
+ - Top positive contributors (features pushing toward default).
+ - Top negative contributors (features pushing against default).
+ - A force-plot visual (saved in outputs/plots/shap_force_plot_highrisk_*).
+
+See `reports/local_shap_summaries.txt` and `reports/high_risk_shap_contributions.csv`.
+
+Conclusions & recommendations
+-----------------------------
+ - The XGBoost model achieves a ROC-AUC of X.XXX and detects risky applicants with Y% recall.
+ - SHAP explains both global patterns and individual decisions, which is crucial for auditability and for taking remedial action (e.g., manual review for applicants where SHAP shows high influence from explainable but acceptable factors).
+ - For deployment in production, log each prediction and associated SHAP values for model governance and periodic fairness checks.
+
+Appendix
+--------
+ - Saved model: outputs/models/best_xgb_model.joblib
+ - Plots: outputs/plots/
+ - Reports: outputs/reports/
