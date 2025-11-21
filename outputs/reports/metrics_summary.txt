@@ -1,0 +1,15 @@
+Model performance on test set
+AUC: 0.943702
+F1: 0.825509
+Precision: 0.930335
+Recall: 0.741913
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9318    0.9845    0.9574      5095
+           1     0.9303    0.7419    0.8255      1422
+
+    accuracy                         0.9316      6517
+   macro avg     0.9311    0.8632    0.8915      6517
+weighted avg     0.9315    0.9316    0.9286      6517

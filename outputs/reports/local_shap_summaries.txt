@@ -1,0 +1,36 @@
+Instance 1 (test idx 6278, pred_proba=1.0000, true_label=1):
+Top positive contributors (pushing towards default):
+  - loan_percent_income: SHAP=3.5179
+  - person_income: SHAP=3.0304
+  - person_home_ownership: SHAP=1.3347
+  - loan_grade: SHAP=0.9319
+  - loan_intent: SHAP=0.9203
+Top negative contributors (pushing against default):
+  - cb_person_cred_hist_length: SHAP=-0.0146
+
+
+Instance 2 (test idx 4002, pred_proba=0.9999, true_label=1):
+Top positive contributors (pushing towards default):
+  - loan_percent_income: SHAP=3.3714
+  - loan_grade: SHAP=2.3700
+  - person_income: SHAP=2.3073
+  - person_home_ownership: SHAP=1.1512
+  - loan_int_rate: SHAP=0.3879
+Top negative contributors (pushing against default):
+  - cb_person_cred_hist_length: SHAP=-0.0067
+  - person_emp_length: SHAP=-0.1364
+  - loan_amnt: SHAP=-0.1373
+
+
+Instance 3 (test idx 5896, pred_proba=0.9999, true_label=1):
+Top positive contributors (pushing towards default):
+  - loan_percent_income: SHAP=4.4367
+  - person_income: SHAP=3.9680
+  - person_home_ownership: SHAP=1.4232
+  - loan_intent: SHAP=0.8020
+  - loan_amnt: SHAP=0.0989
+Top negative contributors (pushing against default):
+  - person_age: SHAP=-0.0804
+  - loan_grade: SHAP=-0.2994
+  - person_emp_length: SHAP=-0.3465
+  - loan_int_rate: SHAP=-0.3602

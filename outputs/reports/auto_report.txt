@@ -1,0 +1,39 @@
+Interpretable Machine Learning: SHAP Analysis of Credit Risk Prediction
+================================================================================
+
+1) Model & Training Summary
+---------------------------
+Model: XGBoost (xgb.XGBClassifier)
+Best hyperparameters (GridSearchCV): {'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 200, 'subsample': 0.8}
+
+2) Performance on Test Set
+---------------------------
+AUC: 0.943702
+F1: 0.825509
+Precision: 0.930335
+Recall: 0.741913
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9318    0.9845    0.9574      5095
+           1     0.9303    0.7419    0.8255      1422
+
+    accuracy                         0.9316      6517
+   macro avg     0.9311    0.8632    0.8915      6517
+weighted avg     0.9315    0.9316    0.9286      6517
+
+Confusion matrix saved at: reports/confusion_matrix.csv
+
+3) Global Feature Importance
+---------------------------
+XGBoost native importances saved at: reports/xgb_feature_importances.csv
+SHAP global plots saved at: outputs/plots/shap_summary_bar.png and outputs/plots/shap_beeswarm.png
+
+4) Local Explanations (Top 3 high-risk cases)
+---------------------------
+Local SHAP contribution CSV: reports/high_risk_shap_contributions.csv
+Local textual summaries: reports/local_shap_summaries.txt
+
+
+NOTE: For regulatory write-ups, include the SHAP plots and local summaries for each contested application.
