@@ -131,3 +131,30 @@ best_model = grid.best_estimator_
 print(classification_report(y_test, y_pred))
 print("ROC-AUC Score:", roc_auc_score(y_test, y_proba))
 ```
+## 📊 Model Insights
+
+### ⭐ Key Features Influencing Default:
+- Income level  
+- Credit history length  
+- Employment stability  
+- Debt-to-income ratio  
+- Interest rate  
+
+### ⭐ Why SHAP is Important
+SHAP helps explain:
+- Why each borrower was classified as **high risk**  
+- Which features increase the risk score  
+- Whether the model is fair and transparent  
+
+---
+
+## 📝 Conclusion
+
+This project demonstrates a complete **Explainable Machine Learning workflow** using:
+- **XGBoost** for strong predictive performance  
+- **SMOTE** to fix imbalance  
+- **SHAP** for interpretability  
+
+It provides both **global** and **local** model explanations, making it suitable for finance, banking, and regulatory use cases.
+
+---
