@@ -1,0 +1,21 @@
+Comparing XGBoost native feature importance vs SHAP-derived importance
+--------------------------------------------------------------------
+
+Overview:
+XGBoost's built-in importance (feature_importances_) is fast and convenient: it reports how much each feature contributed to the model's objective during training (commonly via gain, cover, or frequency). However, this measure is local to the model's splits and does not indicate whether a feature increases or decreases the probability of default for a given borrower. It can also be biased toward features that are used more frequently or have more unique values.
+
+SHAP advantages:
+1. Directional meaning: SHAP values are additive contributions that show whether a feature pushed the prediction higher (towards default) or lower (towards non-default) for each instance.
+2. Consistency across models: SHAP produces comparable attributions that are consistent with game-theoretic guarantees.
+3. Local + Global: You can summarize SHAP across the dataset to get global importance (mean absolute SHAP) and also inspect individual predictions for regulatory explanations.
+
+How to read differences:
+- If a feature ranks high in XGBoost importance but low in SHAP mean |value|:
+  * Interpretation: The model used that feature for splits often, but the actual average contribution to predictions may be small (maybe it helps partition only a subset).
+- If a feature ranks low in XGBoost importance but high in SHAP:
+  * Interpretation: The feature might not be used in many splits but when present it contributes large effects to predictions (high impact for particular subgroups).
+
+Recommendation for practitioners:
+- Use XGBoost importance for quick feature reduction and to check which variables the model relied on during training.
+- Use SHAP for audit-ready, explainable outputs and for local decision support (e.g., explaining to a loan officer or for dispute handling).
+- Report both in documentation: include a simple bar chart from XGBoost and the SHAP summary (beeswarm) to show distribution and direction of influence.
